@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yours Ultimate Boss Is Here</title>
+    <style>
+        /* Base Setup & Cinematic Dark Background */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #070707;
+            font-family: 'Arial Black', Impact, sans-serif;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            perspective: 1200px; /* Gives the 3D depth */
+        }
+
+        /* Vignette overlay for a movie-like feel */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 10%, #000000 90%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* 3D Container */
+        #cinematic-container {
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            animation: cinematic-intro 4s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+        }
+
+        @keyframes cinematic-intro {
+            0% { opacity: 0; transform: scale(0.6) translateZ(-800px); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1) translateZ(0); filter: blur(0); }
+        }
+
+        /* Typography Styling */
+        .title {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            color: #888;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            margin-bottom: -10px;
+            transform: translateZ(60px);
+        }
+
+        .name {
+            font-size: 7rem;
+            margin: 0;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px #ff0000, 0 0 40px #aa0000, 0 20px 40px rgba(0,0,0,0.9);
+            transform: translateZ(120px);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: normal;
+            letter-spacing: 3px;
+            margin-top: 15px;
+            color: #cccccc;
+            transform: translateZ(40px);
+            text-transform: uppercase;
+        }
+
+        .rule-text {
+            font-size: 2rem;
+            margin-top: 30px;
+            color: #ffffff;
+            letter-spacing: 6px;
+            transform: translateZ(80px);
+            text-shadow: 0 0 10px #ffffff;
+        }
+
+        /* The Ultimate Highlighted Quote */
+        .highlight {
+            font-size: 3.5rem;
+            margin-top: 50px;
+            color: #ffd700;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px #ffd700, 0 0 60px #ff8c00;
+            transform: translateZ(180px); /* Pops out the most */
+            font-weight: 900;
+            border: 3px solid rgba(255, 215, 0, 0.7);
+            padding: 25px 40px;
+            background: rgba(255, 215, 0, 0.05);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2) inset, 0 30px 60px rgba(0,0,0,0.9);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <div id="cinematic-container">
+        <div class="title">Yours Ultimate Boss Is Here</div>
+        <h1 class="name">ANSH SHUKLA</h1>
+        
+        <div class="subtitle">Yours Welcome</div>
+        <div class="subtitle">I hope you liked it and don't I don't care about that</div>
+        <div class="rule-text">JUST ANNOUNCING I'M BACK TO RULE</div>
+        
+        <div class="highlight">"Either Death or I will make it -Myself"</div>
+    </div>
+
+    <script>
+        // 3D Parallax Mouse Tracking Script
+        const container = document.getElementById('cinematic-container');
+        const body = document.querySelector('body');
+
+        // Tilts the text based on where your mouse is on the screen
+        body.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 35;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 35;
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Gently resets the position if the mouse leaves the window
+        body.addEventListener('mouseleave', () => {
+            container.style.transition = "transform 0.5s ease";
+            container.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            
+            // Remove transition so it tracks instantly when the mouse returns
+            setTimeout(() => {
+                container.style.transition = "transform 0.1s ease-out";
+            }, 500);
+        });
+    </script>
+</body>
+</html>
